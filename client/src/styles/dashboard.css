@@ -1,0 +1,115 @@
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+}
+.dashboardGrid {
+  margin-top: 20px;
+  width: 90%;
+  margin-bottom: 80px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(10, 10%);
+  grid-template-rows: repeat(10, 10%);
+  grid-template-areas:
+    'a a a b b b b b b b'
+    'a a a b b b b b b b'
+    'a a a c c c c c c c'
+    'a a a c c c c c c c';
+
+}
+.updates {
+  grid-area: a;
+  min-height:220px;
+  min-width:200px;
+  font-family: 'Kodchasan';
+  font-weight: 700;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
+  margin: 5px;
+}
+.pattern1 {
+  border-bottom: 1px solid black;
+}
+.patternItem {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.lines{
+    opacity: .3;
+    stroke: black;
+    stroke-width: 1px;
+    fill: none;
+}
+
+#chart1 {
+  grid-area: b;
+  height: 200px;
+  padding-bottom: 20px;
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
+  display: flex;
+  margin: 5px;
+}
+#chart2 {
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
+  grid-area: c;
+  margin: 5px;
+  height: 200px;
+  overflow-x: scroll;
+}
+.severityTitle {
+  height:40px;
+  display: flex;
+  align-items: center;
+  font-family: 'Kodchasan';
+  justify-content: center;
+}
+.colorBox {
+  height:20px;
+  width:20px;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: column;
+  font-family: 'Kodchasan';
+}
+.label{
+  margin:10px;
+  display: flex;
+}
+@media(max-width:900px){
+  .dashboardGrid {
+    grid-template-areas:
+      'a a a a a a a a a a'
+      'a a a a a a a a a a'
+      'a a a a a a a a a a'
+      'a a a a a a a a a a'
+      'b b b b b b b b b b'
+      'c c c c c c c c c c';
+
+  }
+  .dashTitle {
+    font-size: 30px !important;
+  }
+}
+@media(max-width:750px){
+  .dashTitle {
+    font-size: 20px !important;
+  }
+  #chart1 {
+    justify-content: space-around;
+    height:auto;
+    min-height: 200px;
+
+  }
+  #chart2 {
+      padding-right: 5px;
+  }
+}

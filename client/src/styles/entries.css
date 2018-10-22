@@ -1,0 +1,344 @@
+/* color scheme
+#fff3e3 cream
+#d5aaaa pinkish
+#866d5c brown
+#414f47 greenish
+#17313b darkblue
+*/
+.dailyEntriesTitle {
+  text-align: center;
+  font-size: 40px;
+  width: 100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #17313b;
+  flex-direction: column;
+}
+.newEntry {
+  width:90%;
+  color: #866d5c;
+  background-color: #d5aaaa;
+  border-radius: 5px;
+  padding:0px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  height:0px;
+  overflow: hidden;
+}
+.dropDown {
+  height:auto !important;
+  padding:20px;
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
+}
+.submitWrapper {
+  display: flex;
+  width:100%;
+  justify-content:flex-end;
+  padding-right:10px;
+  box-sizing: border-box;
+}
+.symptomInputs {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,.7);
+  border-radius: 5px;
+  width:30%;
+  padding:5px;
+  box-sizing: border-box;
+  color:#17313b;
+  margin: 5px;
+}
+.mealInputsSection {
+  width: 100%;
+}
+.mealsList {
+  display: flex;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  color:black;
+}
+.mealInputsWrap {
+  background-color: rgba(255,255,255,.7);
+  border-radius: 5px;
+  box-sizing: border-box;
+  width:30%;
+
+}
+.mealInputs {
+  display: flex;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  width:100%;
+  padding-left: 10px;
+  color:black;
+}
+.mealInput1 {
+  border:none !important;
+  border-right: 2px solid black !important;
+  margin-right: 10px;
+}
+.mealInput2 {
+  border:none !important;
+  width:50px;
+}
+.foodItem {
+  display: flex;
+  padding:5px;
+  box-sizing: border-box;
+  color:black;
+}
+.foodInNewEntry {
+  border-right: 2px solid black;
+  width:198px;
+  margin-left:5px;
+}
+.amountInNewEntry {
+  margin-left: 5px;
+}
+.lilCircle {
+  font-size: 20px !important;
+  margin-left: 15px;
+}
+.lilCircle2 {
+  font-size: 20px !important;
+  margin-left: 10px;
+  color:#fff3e3 !important;
+}
+.mealFieldTitle {
+  display: flex;
+  flex-direction: column;
+}
+.mealInputsWrap {
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+.foodAmountInput {
+  width:30px;
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  border-left: 2px solid black;
+  height:17px;
+  outline:none;
+  font-size: 16px;
+  font-family: 'Kodchasan';
+  font-weight: 700;
+  padding-left:5px;
+  box-sizing: border-box;
+}
+.symptomInputsSection {
+  margin-top: 20px;
+
+}
+.symptomInputsWrap {
+  display:flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin-top:10px;
+}
+.inputField::placeholder {
+  color:red;
+}
+.inputField {
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  border-left: 2px solid black;
+  height:20px;
+  outline:none;
+  font-size: 16px;
+  font-family: 'Kodchasan';
+  font-weight: 700;
+  padding-left:5px;
+  box-sizing: border-box;
+}
+.inputFieldInd {
+  width:40px;
+  padding-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  height:18px;
+  outline:none;
+  font-size: 16px;
+  font-family: 'Kodchasan';
+  font-weight: 700;
+  padding-left:5px;
+  box-sizing: border-box;
+}
+.inputWrapper {
+  display: flex;
+}
+.entryInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.fa-plus-circle:hover {
+  color:#866d5c;
+}
+.fa-plus-circle {
+  font-size: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #414f47;
+}
+.fa-plus-circle:active {
+  transform: scale(0.9);
+}
+
+.entries {
+  width:100%;
+  min-height:100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  font-family: 'Kodchasan';
+  font-weight: 700;
+}
+.entriesWrap {
+  color: #866d5c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  width:100%;
+  box-sizing: border-box;
+}
+.dayEntry {
+  width:90%;
+  color: #866d5c;
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
+  background-color: #17313b;
+  border-radius: 5px;
+  padding:20px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+.mealFood {
+  display: flex;
+}
+.meal {
+  background: rgba(255,255,255,.7);
+  border-radius: 5px;
+  width:19%;
+  margin:5px;
+  padding:5px;
+  box-sizing: border-box;
+}
+.mealInNew {
+  margin-top:0px;
+  margin-right: 0px;
+}
+.entryDataWrap {
+  display: flex;
+  flex-direction: column;
+}
+.mealsWrap {
+  display: flex;
+  color:#17313b;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.mealsTitle {
+  margin-top: 20px;
+}
+.symptom {
+  background: rgba(255,255,255,.7);
+  border-radius: 5px;
+  width:32%;
+  margin:5px;
+  margin-top: 5px;
+  padding:5px;
+  box-sizing: border-box;
+  color:#17313b;
+}
+.symField {
+  display: flex;
+ }
+.symFieldTitle {
+  width:40%;
+  color:black;
+}
+.symptomTitle {
+  margin-top: 20px;
+}
+.symptomsWrap {
+  width: 100%;
+  flex-wrap: wrap;
+  display:flex;
+  align-content: flex-start;
+}
+@media(max-width:1260px){
+  .symptomInputs {
+    width:50%;
+    margin:0px;
+  }
+  .mealInputsWrap {
+   width:50%;
+  }
+}
+
+@media (max-width:1100px){
+  .meal {
+    width:100%;
+  }
+  .symptom {
+    width:100%;
+    margin: 0px;
+    margin-top: 5px;
+  }
+  .entryInfo {
+    flex-direction: column;
+  }
+  .dailyEntriesTitle {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .fa-plus-circle {
+    font-size: 35px;
+
+  }
+}
+@media(max-width:900px){
+  .newEntry {
+    width:96%;
+  }
+  .dayEntry {
+    width:96%;
+  }
+  .symptomInputs {
+    width:100%
+  }
+  .symFieldTitle{
+    width:50% !important;
+  }
+  .inputField-900 {
+    width:50% !important;
+  }
+  .lilCircle {
+    margin-left:10px;
+  }
+  .mealFieldTitle1 {
+    width:63% !important;
+  }
+  .foodInNewEntry {
+    width:62%;
+  }
+  .mealInputsWrap {
+   width:100%;
+  }
+}

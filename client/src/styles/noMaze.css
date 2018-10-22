@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css?family=Poiret+One");
+@import url('https://fonts.googleapis.com/css?family=Kodchasan:400,700');
+/* color scheme
+#fff3e3
+#d5aaaa
+#866d5c
+#414f47
+#17313b
+*/
+body {
+  background-color: #fff3e3;
+  margin: 0;
+}
+
+
+#App {
+  overflow: hidden;
+  max-width: 1920px;
+}
+.fixed {
+  position: fixed;
+}
+.entriesGrid {
+  display: flex;
+  justify-content: center;
+}
+
+.fa-bars {
+  margin: 20px;
+  font-size: 30px;
+  position: fixed;
+  right: 0px;
+  z-index: 10;
+  cursor: pointer;
+}
+.pullOutNav {
+  min-height: 100vh;
+  width: 25%;
+  background-color: lightgreen;
+  position: fixed;
+  right: -25%;
+  top: 0px;
+  box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
+}
+.navListWrap {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.navBtnList > li {
+  list-style-type: none;
+  display: block !important;
+  margin-top: 20px;
+  font-family: "poiret one";
+  text-align: center;
+}
+.pullOut {
+  animation: pullOutNav 0.3s ease-out forwards;
+}
+.pullIn {
+  animation: pullInNav 0.4s ease-out forwards;
+}
+@keyframes pullInNav {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes pullOutNav {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+ul > li {
+  list-style-type: none;
+  display: inline;
+  padding: 0;
+  list-style-position: inside;
+  font-size: 30px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.nav-btns > ul > li:hover {
+  color: white;
+  transition: 0.2s ease-out;
+}
+ul {
+  margin: 0px;
+  padding: 0;
+}
+.nav-btns {
+  height: 100%;
+  font-family: "poiret one";
+  display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.nav-btn-stns {
+  display: flex;
+  background-color: #b3f442;
+}
+
+.nav-1 {
+  height: 100px;
+  background-color: lightblue;
+  width: 100%;
+  display: flex;
+}
+.logo-top {
+  display: flex;
+  align-items: flex-start;
+}
+.logo-bot {
+  display: flex;
+  align-items: flex-end;
+}
+.logo {
+  cursor: default;
+  font-size: 40px;
+  font-family: "poiret one";
+}
+
+.logo-stns {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+  background-color: lightgreen;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.logo-left {
+  display: flex;
+  justify-content: flex-start;
+}
+.logo-center {
+  display: flex;
+  justify-content: center;
+}
+.logo-right {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row-reverse;
+}
+.vert-center {
+  display: flex;
+  align-items: center;
+}
+.vert-bot {
+  display: flex;
+  align-items: flex-end;
+}
+.vert-top {
+  display: flex;
+  align-items: flex-start;
+}
+.hor-center {
+  display: flex;
+  justify-content: center;
+}
+.hor-left {
+  display: flex;
+  justify-content: flex-start;
+}
+.hor-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.bg-stretch-1 {
+  width: 10%;
+}
+.bg-stretch-2 {
+  width: 20%;
+}
+.bg-stretch-3 {
+  width: 30%;
+}
+.bg-stretch-4 {
+  width: 40% !important;
+}
+.bg-stretch-5 {
+  width: 50% !important;
+}
+.bg-stretch-6 {
+  width: 60% !important;
+}
+.bg-stretch-7 {
+  width: 70% !important;
+}
+.bg-stretch-8 {
+  width: 80% !important;
+}
+.bg-stretch-9 {
+  width: 90% !important;
+}
+.bg-stretch-10 {
+  width: 100% !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+.loader {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
