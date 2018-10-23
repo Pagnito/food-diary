@@ -15,6 +15,7 @@ class Dashboard extends Component {
     };
   }
   componentDidMount() {
+    window.scroll(0,0)
     axios.get("/api/entryUpdates").then(res => {
       this.setState({ data: res.data }, () => {
         //console.log(res.data);

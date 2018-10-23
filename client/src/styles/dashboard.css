@@ -47,7 +47,7 @@
 
 #chart1 {
   grid-area: b;
-  min-height: 200px;
+  height: 200px;
   padding-bottom: 20px;
   box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
   display: flex;
@@ -79,10 +79,16 @@
   justify-content: flex-start;
   flex-direction: column;
   font-family: 'Kodchasan';
+  word-wrap: break-word;
 }
 .label{
   margin:10px;
   display: flex;
+}
+@media(max-width:1200px){
+  #chart1 {
+    height:300px;
+  }
 }
 @media(max-width:900px){
   .dashboardGrid {
@@ -108,6 +114,9 @@
   }
 }
 @media(max-width:750px){
+  .severityTitle {
+    font-size: 12px;
+  }
   .dashTitle {
     font-size: 20px !important;
   }
@@ -119,5 +128,11 @@
   }
   #chart2 {
       padding-right: 5px;
+  }
+}
+@media(max-width:400px){
+  #chart1 {
+    flex-direction: column;
+    align-items: center;
   }
 }

@@ -15,8 +15,8 @@ class Entries extends Component {
   }
 
   componentDidMount(){
+      window.scroll(0,0)
     this.mounted = true;
-
       axios.get('/api/getDays').then(days=>{
         if(this.mounted===true){
           const rev = days.data.reverse().sort((a,b)=>{ return a.entryNumber<b.entryNumber});
