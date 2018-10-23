@@ -122,8 +122,8 @@
   }
   #chart1 {
     justify-content: space-around;
-    height:auto;
-    min-height: 200px;
+    height:auto !important;
+    min-height: 200px !important;
 
   }
   #chart2 {
