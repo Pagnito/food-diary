@@ -11,8 +11,7 @@
   margin-bottom: 80px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(10, 10%);
-  grid-template-rows: repeat(10, 10%);
+  grid-template-columns: repeat(10, 1fr);
   grid-template-areas:
     'a a a b b b b b b b'
     'a a a b b b b b b b'
@@ -87,7 +86,7 @@
 }
 @media(max-width:1200px){
   #chart1 {
-    height:300px;
+    height:300px !important;
   }
 }
 @media(max-width:900px){
