@@ -39,7 +39,18 @@ class Dashboard extends Component {
       });
     }
   };
-
+renderPatternTitles = () => {
+  if (Object.keys(this.state.data).length > 0) {
+    if(this.state.data.pattern1.length>0){
+      return (
+        <div>
+          <span style={{color:'rgba(0,0,0,.6)'}}>You had this
+          symptom above 7 on more than 5 occasions on the same day as eating this</span>
+        </div>
+      )
+    }
+  }
+}
   renderDash = () => {
     if (Object.keys(this.state.user).length > 0) {
     } else {
@@ -54,8 +65,7 @@ class Dashboard extends Component {
           <div className="updates">
             <div style={{marginBottom:'15px', width:'100%',textAlign: 'center', fontSize: '20px'}}>Patterns</div>
             <div className="pattern1">
-              <span style={{color:'rgba(0,0,0,.6)'}}>You had this
-              symptom on more than 5 occasions on the same day as eating this</span>
+              {this.renderPatternTitles()}
               {this.renderPattern1()}</div>
           </div>
           <div id="chart1" />
