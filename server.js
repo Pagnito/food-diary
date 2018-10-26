@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 ////use cookie session to encrypt cookie from authentication and admniister its lifespan////
 app.use(
   cookieSession({
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 168 * 60 * 60 * 1000,
     keys: ["asjdjfntwof"]
   })
 );
