@@ -20,10 +20,9 @@ class Entries extends Component {
       axios.get('/api/getDays').then(days=>{
         if(this.mounted===true){
           const rev = days.data.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
-          console.log(rev[0])
           this.setState({entries: rev})
           //console.log(days.data)
-          this.setState({entryNumber:this.state.entries.length})
+          this.setState({entryNumber:this.state.entries[0].entryNumber })
         }
       })
     }
@@ -35,10 +34,10 @@ class Entries extends Component {
   addEntry=()=>{
     document.getElementById('newEntry').classList.add('dropDown');
     const dayObj = {
-      entryNumber: this.state.entries.length+1,
+      entryNumber: this.state.entries[0].entryNumber+1,
       newEntry: true
     }
-    this.setState({entryNumber:this.state.entries.length+1})
+    this.setState({entryNumber:this.state.entries[0].entryNumber+1 })
     axios.post('/api/addDay', dayObj)
   }
   renderDayEntries=()=>{

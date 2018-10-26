@@ -52,7 +52,7 @@ function getPatterns(data){
     let severity = 1;
     let severities = [];
     let last30 = entries.slice(-30);
-    last30.map(entry=>{
+    last30.sort((a,b)=>{return a.entryNumber-b.entryNumber;}).map(entry=>{
       entry.symptoms.map(symptom=>{
         if(symptom.severity>severity){
             severity=symptom.severity;
@@ -84,7 +84,7 @@ function getPatterns(data){
         })
 
       entry.symptoms.map(symptom=>{
-        if(symptom.symptom){
+        if(symptom.symptom && symptom.severity>7){
           symptoms.push(symptom.symptom);
               dayObj[ind].symptoms = symptoms;
             }
