@@ -37,7 +37,7 @@ function getPatterns(data){
 
     for(let k in sortedFoodsObj){
 
-        if(sortedFoodsObj[k] > 1){
+        if(sortedFoodsObj[k] > 2){
           amounts.push(sortedFoodsObj[k]);
           foods.push(k);
         }

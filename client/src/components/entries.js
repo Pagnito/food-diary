@@ -19,7 +19,8 @@ class Entries extends Component {
     this.mounted = true;
       axios.get('/api/getDays').then(days=>{
         if(this.mounted===true){
-          const rev = days.data.reverse().sort((a,b)=>{ return a.entryNumber<b.entryNumber});
+          const rev = days.data.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
+          console.log(rev[0])
           this.setState({entries: rev})
           //console.log(days.data)
           this.setState({entryNumber:this.state.entries.length})
