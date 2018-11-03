@@ -33,7 +33,12 @@ export function renderChart2(data) {
      .attr('fill', (d)=>{return colors[d-1]})
      .attr('width', `${97/6}%`)
      .attr('height', 29)
-     .attr('y', (d, i)=>{return (i>5) ? 30 : i>12 ? 60 : i>18 ? 90 : i>24 ? 120 : 0 })
+     .attr('y', (d, i)=>{
+       return (i>23) ? 120 :
+              (i>17) ? 90 :
+              (i>11) ? 60 :
+              (i>5) ? 30 : 0
+     })
      .attr('x', (d,i)=>{
        return (i>5 && i <12) ? `${(i-6)*(99/6)}%`:
          (i>11 && i<18) ? `${(i-12)*(99/6)}%`:

@@ -62,6 +62,7 @@ function getPatterns(data){
         severity=1;
       dayCounter+=1;
     })
+    //console.log(severities)
     return severities;
   }
 
@@ -69,7 +70,7 @@ function getPatterns(data){
     const symptomRedZone=7;
     const matchThreshold=5;
     const dayObj = {};
-    entries.map((entry,ind)=>{
+    entries.sort((a,b)=>{return a.entryNumber-b.entryNumber}).map((entry,ind)=>{
 
       dayObj[ind]={};
       dayObj[ind].foods = [];
@@ -77,6 +78,7 @@ function getPatterns(data){
       let foods = [];
       let symptoms = [];
       entry.meals.map(meal=>{
+
         if(meal.foodName){
             foods.push(meal.foodName.split(','));
             dayObj[ind].foods = foods;
@@ -90,7 +92,7 @@ function getPatterns(data){
             }
         });
       })
-
+      //console.log(dayObj)
 
       let days = {};
       let pairs = [];
@@ -123,7 +125,7 @@ function getPatterns(data){
         }
      }
 
-      //console.log(days)
+
       for(let key2 in days){
         filteredPairs = [];
          days[key2].forEach((pair2,ind)=>{
@@ -135,24 +137,36 @@ function getPatterns(data){
          days[key2] = filteredPairs.map(thisPair=>{return thisPair.split(',')});
          j++
       }
+      //console.log(days)
       let allPairs = [];
       for(let key3 in days){
         days[key3].map(pairs=>{
           allPairs.push(pairs.toString())
         })
       }
-      //console.log(days)
+
 
         let patterns = [];
+        var counter = 0;
         allPairs.sort().forEach((pair,ind)=>{
         if(allPairs[ind-1]===pair){
-          patterns.push(pair)
-        }
-       })
-        //console.log(allPairs)
-        //console.log('this is patterns', patterns)
+          counter+=1;
+          if(counter>5){
+            patterns.push(pair)
+          }
 
-      return patterns;
+        } else {
+          counter=0;
+        }
+
+       })
+       /*console.log(counter)
+        console.log(allPairs)
+        console.log('this is patterns', patterns)*/
+
+
+          return patterns;
+
 
   }
   foodsEatenLowToHigh(data)

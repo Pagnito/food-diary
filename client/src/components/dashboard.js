@@ -18,7 +18,7 @@ class Dashboard extends Component {
     window.scroll(0,0)
     axios.get("/api/entryUpdates").then(res => {
       this.setState({ data: res.data }, () => {
-        //console.log(res.data);
+        console.log(res.data);
         if (this.state.chart1Rendered === false) {
            renderChart1(this.state.data.pattern3);
            renderChart2(this.state.data.pattern2);
