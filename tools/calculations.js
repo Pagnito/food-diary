@@ -173,7 +173,8 @@ function getPatterns(data){
   return {
     pattern1:findPattern1(data),
     pattern2:symptomsInMonth(data),
-    pattern3:foodsEatenLowToHigh(data)
+    pattern3:foodsEatenLowToHigh(data),
+    id:'patterns'
   }
 }
 module.exports.getPatterns = getPatterns;

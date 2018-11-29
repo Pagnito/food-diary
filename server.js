@@ -31,9 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 ////use cookie session to encrypt cookie from authentication and admniister its lifespan////
+
+
 app.use(
   cookieSession({
-    maxAge: 168 * 60 * 60 * 1000,
+    maxAge:222222222222,
     keys: ["asjdjfntwof"]
   })
 );
@@ -45,9 +47,12 @@ app.use(passport.session());
 ////activate routes/////
 require("./routes")(app);
 
-app.use(express.static(path.resolve(__dirname, "client", "build")));
+app.use(express.static(path.resolve(__dirname, "client")));
+app.get("/service-worker.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "service-worker.js"));
+});
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client", "index.html"));
 });
 
 app.listen(PORT);

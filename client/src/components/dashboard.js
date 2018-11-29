@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {renderChart1} from './charts/chart1'
 import {renderChart2} from './charts/chart2'
 import axios from "axios";
+import helpers from '../../util/fe-utils';
+
 import "../styles/dashboard.css";
 
 
@@ -11,23 +13,46 @@ class Dashboard extends Component {
     this.state = {
       data: {},
       user: {},
-      chart1Rendered:false
+
     };
+    this.chart1Rendered = false;
+    this.chart2Rendered =false
   }
   componentDidMount() {
     window.scroll(0,0)
+    var networkDataReceived = false;
     axios.get("/api/entryUpdates").then(res => {
-      this.setState({ data: res.data }, () => {
-        console.log(res.data);
-        if (this.state.chart1Rendered === false) {
-           renderChart1(this.state.data.pattern3);
-           renderChart2(this.state.data.pattern2);
-           this.setState({chart1Rendered:true});
+      if(res){
+        this.setState({ data: res.data }, () => {
+          if (this.chart1Rendered === false) {
+             renderChart1(this.state.data.pattern3);
+             renderChart2(this.state.data.pattern2);
+             this.chart1Rendered=true,
+             this.chart2Rendered=true;
+          }
+        });
+      }
+    }).catch(err =>{
+      var that = this;
+      if('indexedDB' in window){
+          helpers.readData('patterns')
+          .then((data)=>{
+              that.setState({
+                data:data[0]
+              }, ()=>{
+              if (this.chart1Rendered === false) {
+                  renderChart1(this.state.data.pattern3);
+                  renderChart2(this.state.data.pattern2);
+                  this.chart1Rendered=true,
+                  this.chart2Rendered=true;
+                }
+              })
+          })
         }
-      });
-    });
+    })
   }
   renderPattern1 = () => {
+    console.log('RERENDERED')
     if (Object.keys(this.state.data).length > 0) {
       return this.state.data.pattern1.map((dataPiece, ind) => {
         let dataPieceSplit = dataPiece.split(',')

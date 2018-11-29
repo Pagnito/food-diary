@@ -27,9 +27,13 @@ class App extends Component {
       this.setState({user:res.data},()=>{
         if(Object.keys(this.state.user).length>0){
           this.props.history.push('/dashboard')
+          navigator.serviceWorker.controller.postMessage("loggedIn");
         }
       })
-    });
+    })
+    .catch(err=>{
+
+    })
 
   }
   render() {

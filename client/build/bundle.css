@@ -724,8 +724,7 @@ ul {
   margin-bottom: 80px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(10, 10%);
-  grid-template-rows: repeat(10, 10%);
+  grid-template-columns: repeat(10, 1fr);
   grid-template-areas:
     'a a a b b b b b b b'
     'a a a b b b b b b b'
@@ -770,7 +769,7 @@ ul {
   box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.6);
   grid-area: c;
   margin: 5px;
-  height: 200px;
+  min-height: 200px;
   overflow-x: scroll;
 }
 .severityTitle {
@@ -792,10 +791,16 @@ ul {
   justify-content: flex-start;
   flex-direction: column;
   font-family: 'Kodchasan';
+  word-wrap: break-word;
 }
 .label{
   margin:10px;
   display: flex;
+}
+@media(max-width:1200px){
+  #chart1 {
+    height:300px !important;
+  }
 }
 @media(max-width:900px){
   .dashboardGrid {
@@ -805,6 +810,14 @@ ul {
       'a a a a a a a a a a'
       'a a a a a a a a a a'
       'b b b b b b b b b b'
+      'b b b b b b b b b b'
+      'b b b b b b b b b b'
+      'b b b b b b b b b b'
+      'b b b b b b b b b b'
+      'c c c c c c c c c c'
+      'c c c c c c c c c c'
+      'c c c c c c c c c c'
+      'c c c c c c c c c c'
       'c c c c c c c c c c';
 
   }
@@ -813,17 +826,26 @@ ul {
   }
 }
 @media(max-width:750px){
+  .severityTitle {
+    font-size: 12px;
+  }
   .dashTitle {
     font-size: 20px !important;
   }
   #chart1 {
     justify-content: space-around;
-    height:auto;
-    min-height: 200px;
+    height:auto !important;
+    min-height: 200px !important;
 
   }
   #chart2 {
       padding-right: 5px;
+  }
+}
+@media(max-width:400px){
+  #chart1 {
+    flex-direction: column;
+    align-items: center;
   }
 }
 

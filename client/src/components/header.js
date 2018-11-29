@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import helpers from '../../util/fe-utils';
 import "../styles/header.css";
 /* eslint react/prop-types: 0 */
 class Header extends Component {
@@ -7,7 +8,8 @@ class Header extends Component {
     super(props);
     this.state = {
       navState: false,
-      user:{}
+      user:{},
+      loggedOffline: false
     };
   }
   componentDidUpdate(prevProps){
@@ -15,6 +17,17 @@ class Header extends Component {
       this.setState({user:this.props.user})
     }
   }
+componentDidMount(){
+  if(Object.keys(this.state.user).length===0){
+    if('indexedDB' in window){
+      helpers.readData('user')
+      .then(user=>{
+        this.setState({loggedOffline:true,
+                        user: user})
+      })
+    }
+  }
+}
   pullOutNav = () => {
     const nav = document.getElementById("pullOutNav");
 
@@ -29,7 +42,7 @@ class Header extends Component {
     }
   };
   renderHeader=()=>{
-    if(Object.keys(this.state.user).length>0){
+    if(Object.keys(this.state.user).length>0 || this.state.loggedOffline===true){
       return(
         <div className="">
           <i onClick={this.pullOutNav} id="navBtn" className="fas fa-bars" />

@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "pwa": "concurrently \"npm run start\" \"npm run client\"",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run dev --prefix client",

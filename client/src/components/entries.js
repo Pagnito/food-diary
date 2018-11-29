@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NewEntry from './newEntry'
 import axios from 'axios';
 import moment from 'moment';
+import helpers from '../../util/fe-utils'
 import '../styles/entries.css'
 
 class Entries extends Component {
@@ -22,8 +23,22 @@ class Entries extends Component {
           const rev = days.data.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
           this.setState({entries: rev})
           //console.log(days.data)
-          this.setState({entryNumber:this.state.entries[0].entryNumber })
+          this.setState({entryNumber:rev[0].entryNumber })
         }
+      })
+      .catch((err)=>{
+        var that = this;
+        if('indexedDB' in window){
+            helpers.readData('days')
+            .then((days)=>{
+                console.log('FROM IDB', days)
+                const rev = days.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
+                that.setState({
+                  entries:rev
+                })
+                  this.setState({entryNumber:rev[0].entryNumber })
+            })
+          }
       })
     }
 
