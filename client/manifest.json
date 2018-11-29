@@ -1,6 +1,7 @@
 {
     "name": "FoodDiary",
-    "short_name": "FD",
+    "short_name": "Food Diary",
+    "orientation": "portrait-primary",
     "icons": [
         {
             "src": "/src/assets/android-chrome-192x192.png",
@@ -13,7 +14,8 @@
             "type": "image/png"
         }
     ],
-    "start_url": ".../index.html",
+    "start_url": "/index.html",
+    "scope": ".",
     "theme_color": "#ffffff",
     "background_color": "#866d5c",
     "display": "standalone"

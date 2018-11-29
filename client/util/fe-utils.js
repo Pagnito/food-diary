@@ -10,6 +10,9 @@ var idbPromise = idb.open('food-diary', 1, function(db){
   if(!db.objectStoreNames.contains('user')){
     db.createObjectStore('user', {keyPath: 'userName'})
   }
+  if(!db.objectStoreNames.contains('syncedPosts')){
+    db.createObjectStore('syncedPosts', {keyPath: 'entryNumber'})
+  }
 });
 const helpers = {
    writeData: function(st, data){
