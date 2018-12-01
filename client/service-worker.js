@@ -5,7 +5,7 @@ var CACHE_DYNAMIC = 'dynamic-v1';
 
 
   self.addEventListener('install', function(e){
-    console.log('SW installed')
+    //console.log('SW installed')
     e.waitUntil(
       caches.open(CACHE_STATIC)
       .then(function(cache){
@@ -34,7 +34,7 @@ var CACHE_DYNAMIC = 'dynamic-v1';
         keyList.forEach(function(key){
           return Promise.all(keyList.map(function(key){
             if(key !== CACHE_STATIC && key !== CACHE_DYNAMIC){
-              console.log('deleted')
+              //console.log('deleted')
               return caches.delete(key);
             }
           }))
@@ -48,7 +48,7 @@ var CACHE_DYNAMIC = 'dynamic-v1';
 
   //////////////////////////////////////////////////////////////////////////////
   self.addEventListener('message', function(e){
-    console.log(e.data)
+
   })
 
 
@@ -111,7 +111,6 @@ self.addEventListener('fetch', function(e){
             var clonedRes = res.clone();
             clearData('user')
               .then(function () {
-                console.log(clonedRes)
                 return clonedRes.json();
               })
               .then(function (data) {
@@ -146,7 +145,71 @@ self.addEventListener('fetch', function(e){
 
 //////////////////////////////////////////////////////////////////////////////
 self.addEventListener('sync', function(e){
-
+  //console.log(e)
+  if(e.tag==='sync-day-post') {
+    e.waitUntil(
+      readData('syncedDays')
+      .then(function(post){
+        fetch(`${e.currentTarget.location.origin}/api/addDay`, {
+          method:'POST',
+          headers: {
+           'Content-Type': 'application/json',
+           'Accept': 'application/json'
+          },
+          body: JSON.stringify(post[0])
+        }).then(function(res){
+          if(res.ok){
+            res.json().then(function(resData){
+              console.log(resData)
+              deleteOne('syncedDays', resData.entryNumber)
+            })
+          }
+        })
+      })
+    )
+  } else if (e.tag==='sync-meal-post'){
+    e.waitUntil(
+      readData('syncedMeals')
+      .then(function(post){
+        fetch(`${e.currentTarget.location.origin}/api/addMeal`, {
+          method:'POST',
+          headers: {
+           'Content-Type': 'application/json',
+           'Accept': 'application/json'
+          },
+          body: JSON.stringify(post[0])
+        }).then(function(res){
+          if(res.ok){
+            res.json().then(function(resData){
+              //console.log(resData)
+              deleteOne('syncedMeals', resData.entryNumber)
+            })
+          }
+        })
+      })
+    )
+  } else if(e.tag==='sync-symptom-post'){
+    e.waitUntil(
+      readData('syncedSymptoms')
+      .then(function(post){
+        fetch(`${e.currentTarget.location.origin}/api/addSymptom`, {
+          method:'POST',
+          headers: {
+           'Content-Type': 'application/json',
+           'Accept': 'application/json'
+          },
+          body: JSON.stringify(post[0])
+        }).then(function(res){
+          if(res.ok){
+            res.json().then(function(resData){
+              //console.log(resData)
+              deleteOne('syncedSymptoms', resData.entryNumber)
+            })
+          }
+        })
+      })
+    )
+  }
 });
 //////////////////////////////////////////////////////////////////////////////
 

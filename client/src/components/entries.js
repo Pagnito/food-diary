@@ -16,29 +16,27 @@ class Entries extends Component {
   }
 
   componentDidMount(){
-      window.scroll(0,0)
+
+    window.scroll(0,0)
     this.mounted = true;
+    var that = this;
+    if('indexedDB' in window){
+        helpers.readData('days')
+        .then((days)=>{
+            const rev = days.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
+            that.setState({
+              entries:rev
+            })
+              this.setState({entryNumber:rev[0].entryNumber })
+        })
+      }
       axios.get('/api/getDays').then(days=>{
         if(this.mounted===true){
           const rev = days.data.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
           this.setState({entries: rev})
           //console.log(days.data)
-          this.setState({entryNumber:rev[0].entryNumber })
+          this.setState({entryNumber:rev.length > 0 ? rev[0].entryNumber : 0 })
         }
-      })
-      .catch((err)=>{
-        var that = this;
-        if('indexedDB' in window){
-            helpers.readData('days')
-            .then((days)=>{
-                console.log('FROM IDB', days)
-                const rev = days.sort((a,b)=>{ return b.entryNumber-a.entryNumber});
-                that.setState({
-                  entries:rev
-                })
-                  this.setState({entryNumber:rev[0].entryNumber })
-            })
-          }
       })
     }
 
@@ -47,13 +45,29 @@ class Entries extends Component {
   }
 
   addEntry=()=>{
-    document.getElementById('newEntry').classList.add('dropDown');
-    const dayObj = {
-      entryNumber: this.state.entries[0].entryNumber+1,
-      newEntry: true
+    if('serviceWorker' in navigator && 'SyncManager' in window){
+        navigator.serviceWorker.ready
+        .then((sw)=>{
+          document.getElementById('newEntry').classList.add('dropDown');
+          const dayObj = {
+            entryNumber: this.state.entries.length > 0 ? this.state.entries[0].entryNumber+1 : 1,
+            newEntry: true
+          }
+          this.setState({entryNumber:this.state.entries.length > 0 ? this.state.entries[0].entryNumber+1 : 1 })
+          helpers.writeData('syncedDays', dayObj)
+          .then(()=>{
+            sw.sync.register('sync-day-post')
+          })
+        })
+    } else {
+      document.getElementById('newEntry').classList.add('dropDown');
+      const dayObj = {
+        entryNumber: this.state.entries.length > 0 ? this.state.entries[0].entryNumber+1 : 1,
+        newEntry: true
+      }
+      this.setState({entryNumber:this.state.entries.length > 0 ? this.state.entries[0].entryNumber+1 : 1 })
+      axios.post('/api/addDay', dayObj)
     }
-    this.setState({entryNumber:this.state.entries[0].entryNumber+1 })
-    axios.post('/api/addDay', dayObj)
   }
   renderDayEntries=()=>{
 

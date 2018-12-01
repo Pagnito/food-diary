@@ -9,8 +9,14 @@ var idbPromise = idb.open('food-diary', 1, function(db){
   if(!db.objectStoreNames.contains('user')){
     db.createObjectStore('user', {keyPath: 'userName'})
   }
-  if(!db.objectStoreNames.contains('syncedPosts')){
-    db.createObjectStore('syncedPosts', {keyPath: 'entryNumber'})
+  if(!db.objectStoreNames.contains('syncedDays')){
+    db.createObjectStore('syncedDays', {keyPath: 'entryNumber'})
+  }
+  if(!db.objectStoreNames.contains('syncedMeals')){
+    db.createObjectStore('syncedMeals', {keyPath: 'entryNumber'})
+  }
+  if(!db.objectStoreNames.contains('syncedSymptoms')){
+    db.createObjectStore('syncedSymptoms', {keyPath: 'entryNumber'})
   }
 });
 function writeData(st, data){
@@ -40,7 +46,7 @@ function clearData(st){
   })
 }
 function deleteOne(st, id) {
-  return dbPromise
+  return idbPromise
   .then(function(db){
     var tx = db.transaction(st, 'readwrite');
     var store = tx.objectStore(st);

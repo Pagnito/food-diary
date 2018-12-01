@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
+import helpers from '../../util/fe-utils'
 
 /* eslint react/prop-types: 0 */
 class NewEntry extends Component {
@@ -37,7 +38,8 @@ class NewEntry extends Component {
         this.renderIfSameDay();
     }
     if(this.props.newEntry !== prevProps.newEntry){
-        this.setState({newEntry:true})
+        this.setState({newEntry:true});
+        this.renderIfSameDay();
      }
    }
 
@@ -46,6 +48,7 @@ class NewEntry extends Component {
   };
 
   addSymptom = () => {
+
     let errors ={};
     const symptomObj = {
       entryNumber: this.state.entryNumber,
@@ -77,10 +80,41 @@ class NewEntry extends Component {
       errors={}
     }
     this.setState({errors:errors})
+
     if(Object.keys(errors).length===0 && symptomObj.symptom.length>0){
-      axios.post("/api/addSymptom", symptomObj).then(res=>{
-        this.setState({entry:res.data})
-      });
+        if('serviceWorker' in navigator && 'SyncManager' in window){
+          navigator.serviceWorker.ready
+          .then((sw)=>{
+            helpers.writeData('syncedSymptoms', symptomObj)
+            .then(()=>{
+              sw.sync.register('sync-symptom-post')
+              .then(()=>{
+                let dummyState = this.state.entry;
+                let dummySymptoms = this.state.entry.symptoms;
+                dummySymptoms.push(symptomObj);
+                dummyState.symptoms = dummySymptoms;
+                this.setState({entry:dummyState,
+                              symptom: '',
+                              startTime: '',
+                              severity: '',
+                              instant: '',
+                              delay: '',
+                              timeWindow: ''});
+              });
+            })
+          })
+        } else {
+          axios.post("/api/addSymptom", symptomObj).then(res=>{
+            this.setState({entry:res.data,
+              symptom: '',
+              startTime: '',
+              severity: '',
+              instant: '',
+              delay: '',
+              timeWindow: ''
+          });
+        })
+      }
     }
   };
   renderFoodsInMeal = () => {
@@ -128,14 +162,33 @@ class NewEntry extends Component {
       foods: [],
       foodAmounts: []
     }
-
-      if(Object.keys(this.state.errors).length===0 && meal.foodName.length!==0){
-      axios.post('/api/addMeal', meal).then(res=>{
-        this.setState({entry: res.data}, ()=>{
-          this.setState({meal:emptyMeal,
-                         errors: {}})
-        });
-      })
+    if(Object.keys(this.state.errors).length===0 && meal.foodName.length!==0){
+        if('serviceWorker' in navigator && 'SyncManager' in window){
+          navigator.serviceWorker.ready
+          .then((sw)=>{
+            helpers.writeData('syncedMeals', meal)
+            .then(()=>{
+              sw.sync.register('sync-meal-post');
+              let dummyState = this.state.entry;
+              let mealsArr = this.state.entry.meals;
+              meal.foodName = meal.foodName.join(',');
+              meal.foodAmount = meal.foodAmount.join(',');
+              mealsArr.push(meal);
+              dummyState.meals = mealsArr;
+              this.setState({entry:dummyState})
+              this.setState({
+                             meal:emptyMeal,
+                             errors: {}})
+            })
+          })
+        } else {
+          axios.post('/api/addMeal', meal).then(res=>{
+            this.setState({entry: res.data,
+                           meal:emptyMeal,
+                           errors: {}
+            })
+        })
+      }
     }
   }
   renderSymptoms = (symptoms) =>{
@@ -192,10 +245,11 @@ class NewEntry extends Component {
    }
  }
   renderIfSameDay = () => {
+
     if(this.props.entry){
     if (moment(this.props.entry.date).format("MMM Do YY") == moment(Date.now()).format("MMM Do YY")) {
       document.getElementById("newEntry").classList.add("dropDown");
-
+      //console.log(this.props.entry)
     }
   };
 }

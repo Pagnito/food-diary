@@ -16,13 +16,14 @@ class Dashboard extends Component {
 
     };
     this.chart1Rendered = false;
-    this.chart2Rendered =false
+    this.chart2Rendered = false;
   }
   componentDidMount() {
     window.scroll(0,0)
-    var networkDataReceived = false;
+    console.log(navigator)
     axios.get("/api/entryUpdates").then(res => {
       if(res){
+        console.log('FROM NETWORK')
         this.setState({ data: res.data }, () => {
           if (this.chart1Rendered === false) {
              renderChart1(this.state.data.pattern3);
@@ -32,11 +33,13 @@ class Dashboard extends Component {
           }
         });
       }
-    }).catch(err =>{
+    }).catch(()=>{
       var that = this;
       if('indexedDB' in window){
           helpers.readData('patterns')
           .then((data)=>{
+            console.log('FROM IDB');
+            if(data.length>0){
               that.setState({
                 data:data[0]
               }, ()=>{
@@ -47,6 +50,7 @@ class Dashboard extends Component {
                   this.chart2Rendered=true;
                 }
               })
+            }
           })
         }
     })
